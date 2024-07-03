@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>My Listings</h1>
+  {% if user.is_authenticated %}
+    <ul>
+      {% for product in products %}
+        <li>
+          <a href="{% url 'product_detail' product.id %}">{{ product.productname }}</a>
+          <ul>
+            {% for bid in product.bid_set.all %}
+              <li>{{ bid.user.username }}: {{ bid.bid_price }}</li>
+            {% empty %}
+              <li>No bids yet.</li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% empty %}
+        <li>No products listed.</li>
+      {% endfor %}
+    </ul>
+    {% if not products %}
+      <p>You have no listings.</p>
+    {% endif %}
+  {% else %}
+    <p>You need to log in to view your listings.</p>
+    <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+{% endblock %}
+
+{% comment %} {% extends 'base_generic.html' %}
+{% block content %}
+  <h1>My Listings</h1>
+  <ul>
+    {% for product in products %}
+      <li>
+        <a href="{% url 'product_detail' product.id %}">{{ product.title }}</a>
+        <ul>
+          {% for bid in product.bids.all %}
+            <li>{{ bid.bid_by.username }}: {{ bid.bid_price }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %} {% endcomment %}
+
+
+

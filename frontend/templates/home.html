@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antique Bidding Portal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .nav-link {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffcc00;
+            transform: scale(1.1);
+        }
+
+        .fab {
+            font-size: 20px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .fab:hover {
+            color: #ffcc00;
+            transform: scale(1.2);
+        }
+
+        h2 {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-title {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .card-text {
+            font-family: 'Arial', sans-serif;
+            color: #555;
+        }
+
+        .container-fluid {
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <h2>Trending</h2>
+            </div>
+            <div class="row m-3">
+                {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="{{product.image.url}}" class="img-fluid" alt="Product Image">
+                                </div>
+                                <div class="col-md-8">
+                                    <h5 class="card-title">{{ product.productname }}</h5>
+                                    <p class="card-text">{{ product.content }}</p>
+                                    <div class="d-flex justify-content-between">
+                                        <a class="text-decoration-none" href="{% url "details" pk=product.id %}">More details</a>
+                                        <a class="text-decoration-none text-dark fw-bold" href="#">Add to Fav</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html"%}
+{% block content %}
+<p> This the bat used by MSD in worldcup finals </p>
+{% endblock %} 
+
+{% comment %} 
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <h1>{{ product.name }}</h1>
+        <img src="{{ product.image.url }}" class="img-fluid" alt="Product Image">
+        <p>{{ product.content }}</p>
+        <p>Closing time: {{ product.closing_time }}</p>
+        <p>Starting price: {{ product.starting_price }}</p>
+    </div>
+</main>
+{% endblock %} {% endcomment %}
